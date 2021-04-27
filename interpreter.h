@@ -22,4 +22,14 @@ struct Question_Bank
 
 typedef struct Question_Bank Question_Bank;
 
+struct User_Parameters
+{
+    char * type;            // defaults to MCQ for version 1 (type = "MCQ")
+    double difficulty;      // stores the difficulty as specified by the user
+    int no_questions;       // stores the number of questions which the user needs
+    char comparator[2];     // can be "==", "<", "<=", ">", ">="
+};
+
+typedef struct User_Parameters User_Paramters;
+
 #endif
