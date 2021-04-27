@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 
-void list_init(list *self, size_t size_elem)
+void listInit(list *self, size_t size_elem)
 {
 	if (self == NULL) {
 		NULL_ERROR(append);
@@ -24,7 +24,7 @@ void list_init(list *self, size_t size_elem)
 
 }
 
-void list_append(list *self, void *data)
+void listAppend(list *self, void *data)
 {
 	if (self == NULL) {
 		NULL_ERROR(append);
@@ -49,10 +49,10 @@ void list_append(list *self, void *data)
 
 	memmove(start, data, self -> size_elem);
 	self -> num_elems++;
-	list_expand(self);
+	listExpand(self);
 }
 
-void list_insertAt(list *self, unsigned index, void *data)
+void listInsertAt(list *self, unsigned index, void *data)
 {
 	if (self == NULL) {
 		NULL_ERROR(insertAt);
@@ -76,10 +76,10 @@ void list_insertAt(list *self, unsigned index, void *data)
 	// copy the elements data into the space we just made
 	memmove(before_move, data, self -> size_elem);
 	self -> num_elems++;
-	list_expand(self);
+	listExpand(self);
 }
 
-void list_deleteAt(list *self, unsigned index)
+void listDeleteAt(list *self, unsigned index)
 {
 	if (self == NULL) {
 		NULL_ERROR(deleteAt);
@@ -97,14 +97,14 @@ void list_deleteAt(list *self, unsigned index)
 	memmove(after_move, before_move, (self -> num_elems - index - 1) * self -> size_elem);
 
 	self -> num_elems--;
-	list_shrink(self);
+	listShrink(self);
 	
 	if (self -> num_elems == 0) {
 		self -> empty = 1;
 	}
 }
 
-void *list_at(list *self, unsigned index)
+void *listAt(list *self, unsigned index)
 {
 	if (self == NULL) {
 		NULL_ERROR(at);
@@ -122,7 +122,7 @@ void *list_at(list *self, unsigned index)
 
 // used to maintain that the list has space for at least twice as many elements
 // as the current number of elements
-void list_expand(list *self)
+void listExpand(list *self)
 {
 	if (self == NULL) {
 		NULL_ERROR(expand);
@@ -142,7 +142,7 @@ void list_expand(list *self)
 
 // shrink the array if it can store more than 4 times the number of elements
 // as the current number of elements
-void list_shrink(list *self)
+void listShrink(list *self)
 {
 	if (self == NULL) {
 		NULL_ERROR(shrink);
@@ -160,7 +160,7 @@ void list_shrink(list *self)
 	}
 }
 
-void list_destoy(list *self)
+void listDestroy(list *self)
 {
 	if (self == NULL) {
 		NULL_ERROR(destroy);
