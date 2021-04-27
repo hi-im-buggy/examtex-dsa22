@@ -1,7 +1,9 @@
 #ifndef __INCLUDE_LIST_H
 #define __INCLUDE_LIST_H
 
+#include <stdbool.h>
 #include <stddef.h>
+
 #define INIT_BUF_SIZE 8
 
 typedef struct __list list;
@@ -10,11 +12,10 @@ struct __list {
 	size_t mem; // memory used
 	size_t size_elem; // the size of a single element
 	unsigned num_elems; // number of elements
-	char empty; // 1 byte flag
+	bool empty; // boolean flag
 
 };
 
-// function pointers for abstraction
 void listInit(list *, size_t); // initialize the list
 void listDestroy(list *); // free all memory associated with the list
 void listAppend(list *, void *); // add an element at the end of the list
