@@ -17,9 +17,19 @@ typedef struct Question Question;
 struct Question_Bank
 {
     int no_questions;       // stores the number of questions in this question bank
-    Question * questions;   // Array of pointers to struct Question
+    Question ** questions;  // Array of pointers to "struct Question pointers"
 };
 
 typedef struct Question_Bank Question_Bank;
+
+struct User_Parameters
+{
+    char * type;                // defaults to MCQ for version 1 (type = "MCQ")
+    double difficulty;          // difficulty level which the user requires
+    int no_questions;           // number of questions which the user needs
+    char comparator[2];         // can be "==", "<", "<=", ">", ">="
+};
+
+typedef struct User_Parameters User_Parameters;
 
 #endif
