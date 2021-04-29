@@ -1,4 +1,6 @@
-#include"utils.h"
+#include "utils.h"
+#include <ctype.h>
+#include <stdio.h>
 
 void assign(Question_B question, char string_before[],char string_after[])
 {
@@ -87,4 +89,61 @@ void assignAns(Question_B question, char* string_after)
 {
     question.correct_option = string_after;
     return;
+}
+
+// strips the input line of any trailing and leading whitespae
+// returns the stripped string and modifies length accordingly
+char *stripWhitespace(char *line, int *length)
+{
+	if (line == NULL) {
+		fprintf(stderr, "Invalid string passed to stripWhitespace()!\n");
+		return NULL;
+	}
+
+	// a local variable to avoid constant dereferencing
+	int len = *length;
+	int start_index = 0, end_index = len; // length assumed accessible
+	char cur;
+
+	// find the first non whitespace character from the start
+	cur = line[start_index];
+	while (isspace(cur)) {
+		start_index++;
+		cur = line[start_index];
+
+		if (start_index > len) {
+			fprintf(stderr, "Unexpected error in stripWhitespace()!\n");
+			break;
+		}
+	}
+
+	// find the first non whitespace character from the start
+	cur = line[end_index];
+	while (isspace(cur)) {
+		end_index--;
+		cur = line[end_index];
+
+		if (end_index < 0) {
+			fprintf(stderr, "Unexpected error in stripWhitespace()!\n");
+			break;
+		}
+	}
+
+	if (start_index > end_index) {
+		fprintf(stderr, "Unexpected error in stripWhitespace()!\n");
+		return NULL;
+	}
+
+	len = end_index - start_index + 1;
+	char *ret_string = (char *) malloc( (len + 1) * sizeof(char) );
+
+	// copy the new string in
+	for (int i = 0; i < len; i++) {
+		ret_string[i] = line[start_index + i];
+	}
+	
+	ret_string[len] = '\0'; // null terminate
+	*length = len; // update the length
+
+	return ret_string;
 }

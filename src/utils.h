@@ -1,7 +1,6 @@
 #ifndef __UTILS_H
 #define __UTILS_H
 
-
 #include<stdio.h>
 #include<stdbool.h>
 #include<stdlib.h>
@@ -9,6 +8,7 @@
 #include<ctype.h>
 #include<math.h>
 
+char *stripWhitespace(char *, int *);
    // PSEUDOCODE //
     // while(reading lines):
     //     strip_whitespace(line) // strip from the ends only
