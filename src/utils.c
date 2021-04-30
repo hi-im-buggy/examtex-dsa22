@@ -3,7 +3,6 @@
 #include <ctype.h>
 #include <stdio.h>
 
-
 void assign(Question_B question, char string_before[], char string_after[])
 {
 	// we can use toupper() to make strings independent of whether its BLOCK
@@ -92,8 +91,8 @@ void assignOpt(Question_B question, char *string_after)
 
 void assignAns(Question_B question, char *string_after)
 {
-    question.correct_option = string_after;
-    return;
+	question.correct_option = string_after;
+	return;
 }
 
 // strips the input line of any trailing and leading whitespae
@@ -140,15 +139,15 @@ char *stripWhitespace(char *line, int *length)
 	}
 
 	len = end_index - start_index + 1;
-	char *ret_string = (char *) malloc( (len + 1) * sizeof(char) );
+	char *ret_string = (char *)malloc((len + 1) * sizeof(char));
 
 	// copy the new string in
 	for (int i = 0; i < len; i++) {
 		ret_string[i] = line[start_index + i];
 	}
-	
+
 	ret_string[len] = '\0'; // null terminate
-	*length = len; // update the length
+	*length = len;			// update the length
 
 	return ret_string;
 }
