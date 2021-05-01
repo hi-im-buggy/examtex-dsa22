@@ -43,6 +43,14 @@ struct __Question__ {
 };
 
 typedef struct __Question__ Question_B;
+
+void assign(Question_B question, char string_before[], char string_after[]);
+void assignType(Question_B question, char *string_after);
+void assignDiff(Question_B question, char *string_after);
+void assignOpt(Question_B question, char *string_after);
+void assignAns(Question_B question, char *string_after);
+char *stripWhitespace(char *line, int *length);
+
 #define MAX_SIZE_OPTION 1000
 
 #endif
