@@ -1,7 +1,10 @@
 #include "utils.h"
-
 #include <ctype.h>
+#include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 void assign(Question_B question, char string_before[], char string_after[])
 {
