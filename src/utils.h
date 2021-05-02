@@ -26,7 +26,7 @@
 // assign(question, string_before, string_after)
 
 #include "interpreter.h"
-typedef Question Question_B;
+typedef Question* Question_B;
 
 void assign(Question_B question, char string_before[], char string_after[]);
 void assignType(Question_B question, char *string_after);
