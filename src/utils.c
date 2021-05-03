@@ -154,3 +154,19 @@ char *stripWhitespace(char *line, int *length)
 
 	return ret_string;
 }
+
+bool isBlankLine(char *line)
+{
+	bool is_blank = true;
+
+	// check each character in the line before null terminator
+	do {
+		if (!isspace(*line)) {
+			is_blank = false;
+			break;
+		}
+		line++;
+	} while (*line);
+
+	return is_blank;
+}

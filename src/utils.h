@@ -1,6 +1,7 @@
 #ifndef __UTILS_H
 #define __UTILS_H
 
+#include <stdbool.h>
 // PSEUDOCODE //
 // while(reading lines):
 //     strip_whitespace(line) // strip from the ends only
@@ -34,6 +35,7 @@ void assignDiff(Question_B question, char *string_after);
 void assignOpt(Question_B question, char *string_after);
 void assignAns(Question_B question, char *string_after);
 char *stripWhitespace(char *line, int *length);
+bool isBlankLine(char *line);
 
 #define MAX_SIZE_OPTION 1000
 
