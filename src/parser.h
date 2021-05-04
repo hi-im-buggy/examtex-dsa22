@@ -4,8 +4,10 @@
 #include <stdbool.h>
 
 #define INIT_STRING_SIZE 10
-#define QN_STRING "\\question"
 #define MAX_LINE_SIZE 200
+#define MAX_NUM_QUESTIONS 100
+#define QN_STRING "\\question"
+#define TOKEN_DELIMITERS "="
 
 typedef struct __parser_state parser_state;
 struct __parser_state {
