@@ -37,7 +37,57 @@ The project directory structure is organised as follows:
 vector template.  Functions like `listAppend()`, `listInsertAt()`,
 and `listDeleteAt()` are available to modify data held in a list.
 
-Lists must be initialized first with the size of the data type they will be used to store.
+A set of wrappers for specific data types can be generated, which call
+underlying generic functions.  
+In both cases,
+a list `l` must be initialized with `listInit(&l, sizeof(data_type)`
+and destroyed after use with `listDestroy(&l)`
+
+#### Wrappers
+For the wrapper functions, add the line `GENERATE_LIST_WRAPPER(data_type)`
+near the end of `src/listwrapper.h`. The data type must itself be accessible
+from the headerfile. See for example:
+
+```c
+// in listwrapper.h
+typedef struct __test_struct {
+	int a;
+	char c;
+} test_struct;
+
+GENERATE_LIST_WRAPPER(test_struct);
+```
+The struct was declared in place so is accessible, and a set of wrappers
+for it is generated.
+
+```c
+#include "listwrapper.h"
+#include <stdio.h>
+
+int main()
+{
+	list l;
+	listInit(&l, sizeof(test_struct));
+
+	for (int i = 0; i < 10; i++) {
+		test_struct cur;
+		cur.a = i;
+		cur.c = 'a' + i;
+		test_structListAppend(&l, cur);
+	}
+
+	for (int i = 0; i < 10; i++) {
+		test_struct out = test_structListAt(&l, i);
+		printf("%d %c\n", out.a, out.c);
+	}
+	putchar('\n');
+
+	listDestroy(&l);
+	return 0;
+}
+```
+
+#### Generics
 For accessing data stored in a list, `listAt()` is used, which returns a `void` pointer to the specified index.
 This pointer must be typecast to the correct data type to be used properly.
 
