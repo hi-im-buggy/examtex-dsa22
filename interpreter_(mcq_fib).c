@@ -5,18 +5,16 @@
 
 #include "interpreter.h"
 
-int comparator_fn_type(char question_type[], User_Parameters* UP)
+// returns 1 if the user requirement is fulfilled
+int comparator_fn_type(char* question_type, User_Parameters* UP)
 {
-	// B is the difficulty level specified by the user
-	// A is the difficulty level of the question
-
 	if (!(strcmp(UP->type, "BOTH")))
 		return 1;
 
-	else (!strcmp(UP->type, question_type)))
+	if (!strcmp(UP->type, question_type)))
 		return 1;
-
 	
+	return 0;
 }
 
 // returns 1 if the user requirement is fulfilled
@@ -132,13 +130,16 @@ int get_Questions(User_Parameters *UP, Question_Bank *QB)
 	int i = 0;
 	int j = 0;
 	
+	int check_diff;
+	int check_type;
+	
 	for (int i = 0; i < QB->no_questions; i++) {
 
 		diffA = QB->questions[i]->difficulty;
 		
 		strcpy(typeA,QB->questions[i]->type);
-		int check_diff=comparator_fn_diff(diffA, diffB, UP->comparator);
-		int check_type=comparator_fn_type(typeA,UP->type);
+		check_diff=comparator_fn_diff(diffA, diffB, UP->comparator);
+		check_type=comparator_fn_type(typeA,UP->type);
 		if ((check_diff==1)&&(check_type==1)) {
 			// increment the size of array to avoid overflow
 			if (j == curr_size) {
