@@ -81,7 +81,6 @@ Question_Bank parse_file(FILE *fstream)
 			char *post_token = strtok(NULL, TOKEN_DELIMITERS);
 			*bracket_close = '\0';
 
-
 			if (cur_qn == NULL) {
 				fprintf(stderr, "Error: unexpected error occured at line %d!\n",
 						state.line_number);
