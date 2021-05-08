@@ -76,7 +76,7 @@ void assignOpt(Question_B question, char *string_after)
 	int i = 0, Index, j = 0;
 	for (Index = 0; Index < Len; Index++) {
 		char temp = string_after[Index];
-		if (temp = ',') {
+		if (temp == ',') {
 			i++;
 			j = 0;
 		} // we are moving to next row if encounter a comma and resetting index
