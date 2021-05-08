@@ -26,6 +26,12 @@ Question_Bank parse_file(FILE *fstream)
 	do {
 		// read a line from the file and find brackets
 		fgets(line, line_size, fstream);
+
+		// remove newline character from the line
+		char *newline = strchr(line, '\n');
+		if (newline)
+			*newline = '\0';
+
 		state.line_number++;
 
 		// we're in the question if question string was found at start of line
@@ -70,8 +76,11 @@ Question_Bank parse_file(FILE *fstream)
 			substr[sublen] = '\0'; // null terminate
 
 			// tokenize the substring, before and after delim
-			char *pre_token = strtok(line, TOKEN_DELIMITERS);
+			// and don't include the tokens themselves
+			char *pre_token = strtok(line, TOKEN_DELIMITERS) + 1;
 			char *post_token = strtok(NULL, TOKEN_DELIMITERS);
+			*bracket_close = '\0';
+
 
 			if (cur_qn == NULL) {
 				fprintf(stderr, "Error: unexpected error occured at line %d!\n",
@@ -88,6 +97,7 @@ Question_Bank parse_file(FILE *fstream)
 				char *post_token_sanitized =
 					stripWhitespace(post_token, &post_token_length);
 
+				putchar('\n');
 				assign(cur_qn, pre_token_sanitized, post_token_sanitized);
 			}
 		}
