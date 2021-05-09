@@ -34,4 +34,10 @@ struct __user_parameters_set {
 	User_Parameters *params; // array of user params
 };
 
+int comparator_fn_diff(double A, double B, char comparator[2]);
+int comparator_fn_type(char *Question_type, User_Parameters *UP);
+int get_Questions(User_Parameters *UP, Question_Bank *QB);
+int create_QuestionPaper(Question **Question_collection, int size, int N);
+int print_QuestionPaper(Question **QuestionPaper, int N);
+
 #endif

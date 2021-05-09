@@ -5,6 +5,10 @@
 
 #include "interpreter.h"
 
+Question **Question_collection;
+Question **QP;
+
+
 // returns 1 if the user requirement is fulfilled
 int comparator_fn_diff(double A, double B, char comparator[2])
 {
@@ -38,8 +42,6 @@ int comparator_fn_type(char *Question_type, User_Parameters *UP)
 
 	return 0;
 }
-
-Question **Question_collection;
 
 // stores the questions (in an array) which meet the requirement of the user
 int get_Questions(User_Parameters *UP, Question_Bank *QB)
@@ -76,8 +78,6 @@ int get_Questions(User_Parameters *UP, Question_Bank *QB)
 
 	return j;
 }
-
-Question **QP;
 
 int create_QuestionPaper(Question **Question_collection, int size, int N)
 {
