@@ -8,7 +8,6 @@
 Question **Question_collection;
 Question **QP;
 
-
 // returns 1 if the user requirement is fulfilled
 int comparator_fn_diff(double A, double B, char comparator[2])
 {
@@ -48,7 +47,9 @@ int get_Questions(User_Parameters *UP, Question_Bank *QB)
 {
 	int curr_size = 1;
 	int incr_size = 1;
+
 	Question_collection = NULL;
+
 	Question_collection = (Question **)malloc(curr_size * sizeof(Question *));
 
 	double diffA;
@@ -85,6 +86,7 @@ int create_QuestionPaper(Question **Question_collection, int size, int N)
 	srand(time(0));
 
 	QP = NULL;
+
 	if (size >= N) {
 		QP = (Question **)malloc(N * sizeof(Question *));
 
@@ -147,3 +149,4 @@ int print_QuestionPaper(Question **QuestionPaper, int N)
 
 	return 0;
 }
+
