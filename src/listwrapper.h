@@ -3,6 +3,7 @@
 // Will generate a set of wrapper functions given the data type
 
 #include "list.h"
+#include "interpreter.h"
 
 #define CAT_EXPAND(a, b) a##b
 #define CAT(a, b)                                                              \
@@ -34,12 +35,6 @@
 // declaration of functions. Make sure that the specidied data type is
 // accessible from this file (include if necessary)
 GENERATE_LIST_WRAPPER(int);
-
-typedef struct __test_struct {
-	int a;
-	char c;
-} test_struct;
-
-GENERATE_LIST_WRAPPER(test_struct);
+GENERATE_LIST_WRAPPER(User_Parameters);
 
 #endif // __INCLUDE_LIST_WRAPPER_H
