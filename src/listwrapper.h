@@ -2,8 +2,8 @@
 #define __INCLUDE_LIST_WRAPPER_H
 // Will generate a set of wrapper functions given the data type
 
-#include "list.h"
 #include "interpreter.h"
+#include "list.h"
 
 #define CAT_EXPAND(a, b) a##b
 #define CAT(a, b)                                                              \

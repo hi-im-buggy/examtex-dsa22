@@ -1,7 +1,7 @@
 #include "parser.h"
 #include "interpreter.h"
-#include "utils.h"
 #include "listwrapper.h"
+#include "utils.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,7 +9,7 @@
 
 parser_state state;
 
-Question_Bank parse_qb_file(FILE *fstream)/*{{{*/
+Question_Bank parse_qb_file(FILE *fstream) /*{{{*/
 {
 	state.in_question = false;
 	state.line_number = 0;
@@ -106,9 +106,9 @@ Question_Bank parse_qb_file(FILE *fstream)/*{{{*/
 	cur_qn = NULL;
 
 	return ret_qb;
-}/*}}}*/
+} /*}}}*/
 
-User_Parameters_Set parse_up_file(FILE *fstream)/*{{{*/
+User_Parameters_Set parse_up_file(FILE *fstream) /*{{{*/
 {
 #ifdef PARSER_DEBUG
 	printf("parse_up_file() function called!\n");
@@ -134,15 +134,15 @@ User_Parameters_Set parse_up_file(FILE *fstream)/*{{{*/
 			*newline = '\0';
 
 #ifdef PARSER_DEBUG
-printf("reading in a new line: %s\n", line);
+		printf("reading in a new line: %s\n", line);
 #endif
 
 		state.line_number++;
 
-		// we're in the question if user params string was found at start of line
+		// we're in the question if user params string was found at start of
+		// line
 		if ((state.in_question == false) && (strstr(line, UP_STRING) == line)) {
 			state.in_question = true;
-
 
 			// clear cur_params to default
 			cur_params.type = NULL;
@@ -163,7 +163,8 @@ printf("reading in a new line: %s\n", line);
 			printf("type: %s\n", cur_params.type);
 			printf("difficulty: %lf\n", cur_params.difficulty);
 			printf("number: %d\n", cur_params.no_questions);
-			printf("comparator: %c%c\n", cur_params.comparator[0], cur_params.comparator[1]);
+			printf("comparator: %c%c\n", cur_params.comparator[0],
+				   cur_params.comparator[1]);
 #endif
 		}
 
@@ -172,7 +173,7 @@ printf("reading in a new line: %s\n", line);
 			char *bracket_close = strchr(line, '}');
 
 			if (bracket_open == NULL || bracket_close == NULL ||
-					bracket_open > bracket_close) {
+				bracket_open > bracket_close) {
 				fprintf(stderr,
 						"Error: mismatched/missing brackets on line %d!\n",
 						state.line_number);
@@ -187,7 +188,7 @@ printf("reading in a new line: %s\n", line);
 
 			memcpy(substr, bracket_open, sublen);
 			substr[sublen] = '\0'; // null terminate
-			
+
 			// convert the substring to all uppercase
 			for (int index = 0; index < sublen; index++) {
 				substr[index] = toupper(substr[index]);
@@ -196,7 +197,9 @@ printf("reading in a new line: %s\n", line);
 			// Here we must do the parsing slightly differently because
 			// difficulty might have a two char comparator
 			if (strstr(substr, "TYPE") != NULL) {
-				strtok(substr, TOKEN_DELIMITERS); // pre_token should be "type" either way
+				strtok(
+					substr,
+					TOKEN_DELIMITERS); // pre_token should be "type" either way
 				char *post_token = strtok(NULL, TOKEN_DELIMITERS);
 
 				// remove the closing bracket from the string
@@ -204,17 +207,20 @@ printf("reading in a new line: %s\n", line);
 				*close_bracket = '\0';
 
 				int post_token_len = strlen(post_token);
-				char *post_token_sanitized = stripWhitespace(post_token, &post_token_len);
+				char *post_token_sanitized =
+					stripWhitespace(post_token, &post_token_len);
 
 				cur_params.type = post_token_sanitized;
 			}
 
 			else if (strstr(substr, "NUMBER") != NULL) {
-				strtok(substr, TOKEN_DELIMITERS); // pre_token should be "number" either way
+				strtok(substr, TOKEN_DELIMITERS); // pre_token should be
+												  // "number" either way
 				char *post_token = strtok(NULL, TOKEN_DELIMITERS);
 
 				int post_token_len = strlen(post_token);
-				char *post_token_sanitized = stripWhitespace(post_token, &post_token_len);
+				char *post_token_sanitized =
+					stripWhitespace(post_token, &post_token_len);
 
 				cur_params.no_questions = atoi(post_token_sanitized);
 			}
@@ -242,11 +248,13 @@ printf("reading in a new line: %s\n", line);
 					cur_params.comparator[1] = '\0';
 				}
 
-				strtok(substr, ">=<"); // pre_token should be "number" either way
+				strtok(substr,
+					   ">=<"); // pre_token should be "number" either way
 				char *post_token = strtok(NULL, ">=<");
 
 				int post_token_len = strlen(post_token);
-				char *post_token_sanitized = stripWhitespace(post_token, &post_token_len);
+				char *post_token_sanitized =
+					stripWhitespace(post_token, &post_token_len);
 
 				cur_params.difficulty = strtod(post_token_sanitized, NULL);
 			}
@@ -266,14 +274,15 @@ printf("reading in a new line: %s\n", line);
 	printf("type: %s\n", cur_params.type);
 	printf("difficulty: %lf\n", cur_params.difficulty);
 	printf("number: %d\n", cur_params.no_questions);
-	printf("comparator: %c%c\n", cur_params.comparator[0], cur_params.comparator[1]);
+	printf("comparator: %c%c\n", cur_params.comparator[0],
+		   cur_params.comparator[1]);
 #endif
 
 	// now params_list contains everything, so we copy the user params
 	// to the set to be returned
-	
+
 	ret_user_params.no_params = params_list.num_elems;
 	ret_user_params.params = params_list.buf;
 
 	return ret_user_params;
-}/*}}}*/
+} /*}}}*/
