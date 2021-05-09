@@ -39,6 +39,9 @@ Question_Bank parse_qb_file(FILE *fstream) /*{{{*/
 			state.in_question = true;
 
 			// allocate memory for the current qn
+#ifdef PARSER_DEBUG
+			printf("allocating memory for cur_qn!\n");
+#endif
 			cur_qn = (Question *)malloc(sizeof(Question));
 		}
 
@@ -47,7 +50,7 @@ Question_Bank parse_qb_file(FILE *fstream) /*{{{*/
 			state.in_question = false;
 
 			// once we're out of the question, add it to the question bank
-			*(ret_qb.questions + ret_qb.no_questions) = cur_qn;
+			ret_qb.questions[ret_qb.no_questions] = cur_qn;
 			ret_qb.no_questions++;
 
 			// and invalidate cur_qn now
@@ -88,7 +91,20 @@ Question_Bank parse_qb_file(FILE *fstream) /*{{{*/
 					stripWhitespace(post_token, &post_token_length);
 
 				putchar('\n');
+#ifdef PARSER_DEBUG
+				printf("pre_token_sanitized: %s\n", pre_token_sanitized);
+				printf("post_token_sanitized: %s\n", post_token_sanitized);
+#endif
+
 				assign(cur_qn, pre_token_sanitized, post_token_sanitized);
+
+#ifdef PARSER_DEBUG
+				assign(cur_qn, "type", "mcq");
+				printf("LOOK HERE!\n");
+				printf("cur qn\n");
+				printf("type: %s\n", cur_qn->type);
+				printf("text: %s\n", cur_qn->text);
+#endif
 			}
 		}
 
@@ -98,9 +114,21 @@ Question_Bank parse_qb_file(FILE *fstream) /*{{{*/
 	// After EOF, we could've just ended a question
 	state.in_question = false;
 
+#ifdef PARSER_DEBUG
+	printf("cur qn\n");
+	printf("type: %s\n", cur_qn->type);
+	printf("text: %s\n", cur_qn->text);
+#endif
+
 	// once we're out of the question, add it to the question bank
 	*(ret_qb.questions + ret_qb.no_questions) = cur_qn;
 	ret_qb.no_questions++;
+
+#ifdef PARSER_DEBUG
+	printf("ret_qb.questions[ret_qb.no_questions - 1]\n");
+	printf("type: %s\n", ret_qb.questions[ret_qb.no_questions - 1]->type);
+	printf("text: %s\n", ret_qb.questions[ret_qb.no_questions - 1]->type);
+#endif
 
 	// and invalidate cur_qn now
 	cur_qn = NULL;

@@ -5,6 +5,9 @@
 
 #include "interpreter.h"
 
+Question **Question_collection;
+Question **QP;
+
 // returns 1 if the user requirement is fulfilled
 int comparator_fn_diff(double A, double B, char comparator[2])
 {
@@ -39,13 +42,14 @@ int comparator_fn_type(char *Question_type, User_Parameters *UP)
 	return 0;
 }
 
-Question **Question_collection;
-
 // stores the questions (in an array) which meet the requirement of the user
 int get_Questions(User_Parameters *UP, Question_Bank *QB)
 {
 	int curr_size = 1;
 	int incr_size = 1;
+
+	Question_collection = NULL;
+
 	Question_collection = (Question **)malloc(curr_size * sizeof(Question *));
 
 	double diffA;
@@ -77,11 +81,11 @@ int get_Questions(User_Parameters *UP, Question_Bank *QB)
 	return j;
 }
 
-Question **QP;
-
 int create_QuestionPaper(Question **Question_collection, int size, int N)
 {
 	srand(time(0));
+
+	QP = NULL;
 
 	if (size >= N) {
 		QP = (Question **)malloc(N * sizeof(Question *));

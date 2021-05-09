@@ -4,12 +4,11 @@ void assignType(Question_B question, char *string_after)
 {
 	// we now know its to be set for type
 	int Len = strlen(string_after);
-	char Temp[Len];
+	char *Temp = (char *)malloc(sizeof(char) * (Len + 1));
 	for (int i = 0; i < Len; i++) {
 		Temp[i] = toupper(string_after[i]);
 		// we are making sure MCQ or McQ or Mcq or mCQ all give same
 	}
-	question->type = (char *)malloc(sizeof(char *));
 	question->type = Temp;
 
 	if (strcmp(Temp, "FIB") == 0) {
@@ -53,19 +52,14 @@ void assignDiff(Question_B question, char *string_after)
 
 void assignText(Question_B question, char *string_after)
 {
-	/*long int Len = strlen(string_after);
-	char Temp[Len];
+	int len = strlen(string_after);
+	question->text = (char *)malloc(sizeof(char) * (len + 1));
 
-	for (int i = 0; i < Len; i++)
-	{
-		Temp[i] = (string_after[i]);
-		// we are making sure MCQ or McQ or Mcq or mCQ all give same
-	}*/
+	for (int i = 0; i < len; i++) {
+		question->text[i] = string_after[i];
+	}
 
-	question->text = (char *)malloc(sizeof(char *));
-	question->text = string_after;
-
-	return;
+	question->text[len] = '\0';
 }
 
 void assignOpt(Question_B question, char *string_after)
@@ -125,15 +119,24 @@ void assign(Question_B question, char string_before[], char string_after[])
 {
 	// we can use toupper() to make strings independent of whether its BLOCK
 	// letters or not
-	if (strcmp(string_before, "Type") == 0)
+	int Len = strlen(string_before);
+	char Temp[Len + 1];
+	for (int i = 0; i < Len; i++) {
+		Temp[i] = toupper(string_before[i]);
+		// we are making sure MCQ or McQ or Mcq or mCQ all give same
+	}
+	Temp[Len] = '\0'; // without end of array character, strcmp isn't detecting
+					  // the similarity
+
+	if (strcmp(Temp, "TYPE") == 0)
 		assignType(question, string_after);
-	else if (strcmp(string_before, "Difficulty") == 0)
+	else if (strcmp(Temp, "DIFFICULTY") == 0)
 		assignDiff(question, string_after);
-	else if (strcmp(string_before, "Text") == 0)
+	else if (strcmp(Temp, "TEXT") == 0)
 		assignText(question, string_after);
-	else if (strcmp(string_before, "Opt") == 0)
+	else if (strcmp(Temp, "OPT") == 0)
 		assignOpt(question, string_after);
-	else if (strcmp(string_before, "Ans") == 0)
+	else if (strcmp(Temp, "ANS") == 0)
 		assignAns(question, string_after);
 
 	return;
@@ -150,7 +153,7 @@ char *stripWhitespace(char *line, int *length)
 
 	// a local variable to avoid constant dereferencing
 	int len = *length;
-	int start_index = 0, end_index = len; // length assumed accessible
+	int start_index = 0, end_index = len - 1; // length assumed accessible
 	char cur;
 
 	// find the first non whitespace character from the start
@@ -165,7 +168,7 @@ char *stripWhitespace(char *line, int *length)
 		}
 	}
 
-	// find the first non whitespace character from the start
+	// find the last non whitespace character
 	cur = line[end_index];
 	while (isspace(cur)) {
 		end_index--;

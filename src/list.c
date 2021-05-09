@@ -1,4 +1,6 @@
 #include "list.h"
+#include "interpreter.h"
+#include "listwrapper.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -177,3 +179,5 @@ void listDestroy(list *self)
 	if (self->buf != NULL)
 		free(self->buf);
 }
+
+GENERATE_LIST_WRAPPER(User_Parameters);
