@@ -204,13 +204,13 @@ bool isBlankLine(char *line)
 	bool is_blank = true;
 
 	// check each character in the line before null terminator
-	do {
+	while (*line) {
 		if (!isspace(*line)) {
 			is_blank = false;
 			break;
 		}
 		line++;
-	} while (*line);
+	}
 
 	return is_blank;
 }
