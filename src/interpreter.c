@@ -48,6 +48,7 @@ int get_Questions(User_Parameters *UP, Question_Bank *QB)
 {
 	int curr_size = 1;
 	int incr_size = 1;
+	Question_collection = NULL;
 	Question_collection = (Question **)malloc(curr_size * sizeof(Question *));
 
 	double diffA;
@@ -83,6 +84,7 @@ int create_QuestionPaper(Question **Question_collection, int size, int N)
 {
 	srand(time(0));
 
+	QP = NULL;
 	if (size >= N) {
 		QP = (Question **)malloc(N * sizeof(Question *));
 

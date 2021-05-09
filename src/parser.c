@@ -39,6 +39,9 @@ Question_Bank parse_qb_file(FILE *fstream)/*{{{*/
 			state.in_question = true;
 
 			// allocate memory for the current qn
+#ifdef PARSER_DEBUG
+			printf("allocating memory for cur_qn!\n");
+#endif
 			cur_qn = (Question *)malloc(sizeof(Question));
 		}
 
@@ -92,7 +95,16 @@ Question_Bank parse_qb_file(FILE *fstream)/*{{{*/
 				printf("pre_token_sanitized: %s\n", pre_token_sanitized);
 				printf("post_token_sanitized: %s\n", post_token_sanitized);
 #endif
+
 				assign(cur_qn, pre_token_sanitized, post_token_sanitized);
+
+#ifdef PARSER_DEBUG
+				assign(cur_qn, "type", "mcq");
+				printf("LOOK HERE!\n");
+				printf("cur qn\n");
+				printf("type: %s\n", cur_qn->type);
+				printf("text: %s\n", cur_qn->text);
+#endif
 			}
 		}
 
