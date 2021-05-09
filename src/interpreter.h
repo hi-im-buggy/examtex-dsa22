@@ -20,6 +20,7 @@ struct Question_Bank {
 
 typedef struct Question_Bank Question_Bank;
 
+typedef struct User_Parameters User_Parameters;
 struct User_Parameters {
 	char *type;			// defaults to MCQ for version 1 (type = "MCQ")
 	double difficulty;	// difficulty level which the user requires
@@ -27,6 +28,10 @@ struct User_Parameters {
 	char comparator[2]; // can be "==", "<", "<=", ">", ">="
 };
 
-typedef struct User_Parameters User_Parameters;
+typedef struct __user_parameters_set User_Parameters_Set;
+struct __user_parameters_set {
+	int no_params;
+	User_Parameters *params; // array of user params
+};
 
 #endif
