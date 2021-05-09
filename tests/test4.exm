@@ -1,0 +1,72 @@
+\question
+{type = mcq}
+{difficulty = 1}
+{text = Konark temple was built by ?}
+{opt = Maratha,Ganga,Chola,Pallava}
+{ans =Ganga}
+
+\question
+{type=mcq}
+{difficulty=0.2}
+{text=English is a ?}
+{opt=Place,Food,Language,Device}
+{ans=Language}
+
+\question
+{type=mcq}
+{difficulty=0.6}
+{text=adjective defines what ?}
+{opt=verb,adverb,noun,conjunction}
+{ans=noun}
+
+\question
+{type=mcq}
+{difficulty=0.2}
+{text=Who is PM of India?}
+{opt=Kim,KCR,Rahul,Modi}
+{ans=Modi}
+
+\question
+{type=mcq}
+{difficulty=0.4}
+{text=Who is CM of telangana ?}
+{opt=KCR,Jagan,Rahul,Modi}
+{ans=KCR}
+
+\question
+{type=mcq}
+{difficulty=0.6}
+{text=Which team won last IPL?}
+{opt=KKR,RCB,SRH,MI}
+{ans=MI}
+
+\question
+{type=mcq}
+{difficulty=0.4}
+{text=Who stepped on moon first time?}
+{opt=Armstrong,Kalpana,Sunitha,None of the above}
+{ans=Armstrong}
+
+\question
+{type=mcq}
+{difficulty=0.8}
+{text=What is first I stands for in IIITH?}
+{opt=Indian,International,Institute,None}
+{ans=International}
+
+\question
+{type=mcq}
+{difficulty=0.5}
+{text=Who is CEO of Tesla?}
+{opt=Mark,Ambani,Tim cook,Musk}
+{ans=Musk}
+
+\question
+{type=mcq}
+{difficulty=0.8}
+{text=Who is CEO of apple ltd?}
+{opt=Tim cook,Bill gates,Sundar,None}
+{ans=Tim cook}
+
+
+
