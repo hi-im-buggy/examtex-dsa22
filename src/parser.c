@@ -125,9 +125,9 @@ Question_Bank parse_qb_file(FILE *fstream) /*{{{*/
 	ret_qb.no_questions++;
 
 #ifdef PARSER_DEBUG
-printf("ret_qb.questions[ret_qb.no_questions - 1]\n");
-printf("type: %s\n", ret_qb.questions[ret_qb.no_questions - 1] -> type);
-printf("text: %s\n", ret_qb.questions[ret_qb.no_questions - 1] -> type);
+	printf("ret_qb.questions[ret_qb.no_questions - 1]\n");
+	printf("type: %s\n", ret_qb.questions[ret_qb.no_questions - 1]->type);
+	printf("text: %s\n", ret_qb.questions[ret_qb.no_questions - 1]->type);
 #endif
 
 	// and invalidate cur_qn now

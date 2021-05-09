@@ -1,14 +1,14 @@
 #include "interpreter.h"
-#include "parser.h"
-#include "utils.h"
 #include "list.h"
 #include "listwrapper.h"
+#include "parser.h"
+#include "utils.h"
+#include <getopt.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <getopt.h>
 
-int main(int argc, char * const argv[])
+int main(int argc, char *const argv[])
 {
 	// default to stdin and stdout
 	char *in_file = NULL, *out_file = NULL, *up_file;
@@ -18,19 +18,15 @@ int main(int argc, char * const argv[])
 	// parse commandline arguments
 	int opt;
 	while ((opt = getopt(argc, argv, "i:u:o:")) != -1) {
-		switch(opt) {
-			case 'i':
-				in_file = optarg;
-				break;
-			case 'o':
-				out_file = optarg;
-				break;
-			case 'u':
-				up_file = optarg;
-				break;
-			case 'h': default:
-				fprintf(stderr, "\nUsage: %s -i [infile] -o [outfile]\n\n", argv[0]);
-				return 0;
+		switch (opt) {
+		case 'i': in_file = optarg; break;
+		case 'o': out_file = optarg; break;
+		case 'u': up_file = optarg; break;
+		case 'h':
+		default:
+			fprintf(stderr, "\nUsage: %s -i [infile] -o [outfile]\n\n",
+					argv[0]);
+			return 0;
 		}
 	}
 
@@ -53,11 +49,11 @@ int main(int argc, char * const argv[])
 	extern Question **Question_collection;
 	extern Question **QP;
 
-
 	int num_qualified_questions;
 	for (int i = 0; i < ups.no_params; i++) {
 		num_qualified_questions = get_Questions(ups.params + i, &qb);
-		create_QuestionPaper(Question_collection, num_qualified_questions, ups.params[i].no_questions);
+		create_QuestionPaper(Question_collection, num_qualified_questions,
+							 ups.params[i].no_questions);
 		print_QuestionPaper(QP, ups.params[i].no_questions);
 	}
 
