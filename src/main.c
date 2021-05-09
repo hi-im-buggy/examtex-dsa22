@@ -10,9 +10,10 @@
 
 int main(int argc, char *const argv[])
 {
-	// default to stdin and stdout
-	char *in_file = NULL, *out_file = NULL, *up_file;
-	FILE *instream = stdin, *outstream = stdout;
+	// in_file is the file from which the question bank is read
+	// up_file is the file from which the user parameters are read
+	char *in_file = NULL, *up_file = NULL;
+	FILE *instream = stdin;
 	FILE *upstream = NULL;
 
 	// parse commandline arguments
@@ -20,11 +21,10 @@ int main(int argc, char *const argv[])
 	while ((opt = getopt(argc, argv, "i:u:o:")) != -1) {
 		switch (opt) {
 		case 'i': in_file = optarg; break;
-		case 'o': out_file = optarg; break;
 		case 'u': up_file = optarg; break;
 		case 'h':
 		default:
-			fprintf(stderr, "\nUsage: %s -i [infile] -o [outfile]\n\n",
+			fprintf(stderr, "\nUsage: %s -i [question bank file] -u [user params file]\n\n",
 					argv[0]);
 			return 0;
 		}
@@ -37,9 +37,6 @@ int main(int argc, char *const argv[])
 
 	if (in_file != NULL)
 		instream = fopen(in_file, "r");
-
-	if (out_file != NULL)
-		outstream = fopen(out_file, "w");
 
 	if (up_file != NULL)
 		upstream = fopen(up_file, "r");
