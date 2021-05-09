@@ -1,0 +1,34 @@
+\question
+{type=mcq}
+{difficulty=0.2}
+{text = C is a language}
+{opt=Functional,Procedural,Objects,Events}
+{ans=Functional}
+   
+\question
+{type=mcq}
+{difficulty=0.2}
+{text = X is a language}
+{opt=Functional,Procedural,Objects,Events}
+{ans=Functional}
+   
+\question
+{type=mcq}
+{difficulty=0.2}
+{text = A is a language}
+{opt=Functional,Procedural,Objects,Events}
+{ans=Functional}
+   
+\question
+{type=mcq}
+{difficulty=0.2}
+{text = R is a language}
+{opt=Functional,Procedural,Objects,Events}
+{ans=Functional}
+   
+\question
+{type=mcq}
+{difficulty=0.2}
+{text = F is a language}
+{opt=Functional,Procedural,Objects,Events}
+{ans=Functional}
