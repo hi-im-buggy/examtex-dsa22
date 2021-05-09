@@ -1,7 +1,13 @@
 #ifndef __UTILS_H
 #define __UTILS_H
 
+#include <ctype.h>
+#include <math.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 // PSEUDOCODE //
 // while(reading lines):
 //     strip_whitespace(line) // strip from the ends only
@@ -32,7 +38,9 @@ typedef Question *Question_B;
 void assign(Question_B question, char string_before[], char string_after[]);
 void assignType(Question_B question, char *string_after);
 void assignDiff(Question_B question, char *string_after);
+void assignText(Question_B question, char *string_after);
 void assignOpt(Question_B question, char *string_after);
+void assignOptCheck(Question_B question, char *string_after);
 void assignAns(Question_B question, char *string_after);
 char *stripWhitespace(char *line, int *length);
 bool isBlankLine(char *line);

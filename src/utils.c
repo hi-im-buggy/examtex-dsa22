@@ -1,40 +1,35 @@
 #include "utils.h"
-#include <ctype.h>
-#include <math.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-void assign(Question_B question, char string_before[], char string_after[])
-{
-	// we can use toupper() to make strings independent of whether its BLOCK
-	// letters or not
-	if (strcmp(string_before, "Type") == 0)
-		assignType(question, string_after);
-	else if (strcmp(string_before, "Difficulty") == 0)
-		assignDiff(question, string_after);
-	else if (strcmp(string_before, "Opt") == 0)
-		assignOpt(question, string_after);
-	else if (strcmp(string_before, "Ans") == 0)
-		assignAns(question, string_after);
-
-	return;
-}
 
 void assignType(Question_B question, char *string_after)
 {
 	// we now know its to be set for type
 	int Len = strlen(string_after);
+	char Temp[Len];
 	for (int i = 0; i < Len; i++) {
-		string_after[i] = toupper(string_after[i]);
+		Temp[i] = toupper(string_after[i]);
 		// we are making sure MCQ or McQ or Mcq or mCQ all give same
 	}
-	question.type = string_after;
+	question->type = (char *)malloc(sizeof(char *));
+	question->type = Temp;
+
+	if (strcmp(Temp, "FIB") == 0) {
+		question->options = NULL;
+		question->no_options = 0;
+	}
 
 	return;
 }
 
+long long int power(int a, int b)
+{
+	long long int temp = a;
+
+	for (int i = 0; i < b - 1; i++) {
+		temp = temp * a;
+	}
+
+	return temp;
+}
 void assignDiff(Question_B question, char *string_after)
 {
 	// we have the values of the format 0.xyz..., which we have to carefully
@@ -43,13 +38,32 @@ void assignDiff(Question_B question, char *string_after)
 	// no.of digits is Len - 2;   (0 and ".")
 	double value = 0;
 	for (int i = 2; i < Len; i++) {
-		value = value + string_after[i];
+		value = value + string_after[i] -
+				48; // to get back from ascii value to number
 		value = value * 10;
-	}
+	} // 0.6
 	// this we'll have value = the number xyz....
-	// to make it decimal divide it with 10^(len-1)
-	value = value / pow(10, Len - 1);
-	question.difficulty = value;
+	// to make it decimal divide it with 10^(len)
+	long long int Temp = power(10, Len - 1);
+	value = value / Temp;
+	question->difficulty = value;
+
+	return;
+}
+
+void assignText(Question_B question, char *string_after)
+{
+	/*long int Len = strlen(string_after);
+	char Temp[Len];
+
+	for (int i = 0; i < Len; i++)
+	{
+		Temp[i] = (string_after[i]);
+		// we are making sure MCQ or McQ or Mcq or mCQ all give same
+	}*/
+
+	question->text = (char *)malloc(sizeof(char *));
+	question->text = string_after;
 
 	return;
 }
@@ -69,14 +83,23 @@ void assignOpt(Question_B question, char *string_after)
 	CommaCount++;
 	// Now this is the count of options.
 	char **array;
-	question.no_options = CommaCount;
+	question->no_options = CommaCount;
 	// we have comma count no.of options, so we can make an array of arrays
-	char OptArray[CommaCount][MAX_SIZE_OPTION]; // let max size of options be
-												// MAX SIZE OPTION
+	// char** OptArray =
+	// (char**)(malloc(sizeof(char*)*CommaCount*MAX_SIZE_OPTION)); // let max
+	// size of options be
+	// MAX SIZE OPTION
+
+	char **OptArray =
+		(char **)malloc(CommaCount * sizeof(char *)); // Allocate row pointers
+	for (int i = 0; i < CommaCount; i++)
+		OptArray[i] = (char *)malloc(
+			MAX_SIZE_OPTION * sizeof(char)); // Allocate each row separately
+
 	int i = 0, Index, j = 0;
 	for (Index = 0; Index < Len; Index++) {
 		char temp = string_after[Index];
-		if (temp = ',') {
+		if (temp == ',') {
 			i++;
 			j = 0;
 		} // we are moving to next row if encounter a comma and resetting index
@@ -87,14 +110,32 @@ void assignOpt(Question_B question, char *string_after)
 			j++;
 		}
 	}
-	question.options = OptArray;
+	question->options = OptArray;
 
 	return;
 }
 
 void assignAns(Question_B question, char *string_after)
 {
-	question.correct_option = string_after;
+	question->correct_option = string_after;
+	return;
+}
+
+void assign(Question_B question, char string_before[], char string_after[])
+{
+	// we can use toupper() to make strings independent of whether its BLOCK
+	// letters or not
+	if (strcmp(string_before, "Type") == 0)
+		assignType(question, string_after);
+	else if (strcmp(string_before, "Difficulty") == 0)
+		assignDiff(question, string_after);
+	else if (strcmp(string_before, "Text") == 0)
+		assignText(question, string_after);
+	else if (strcmp(string_before, "Opt") == 0)
+		assignOpt(question, string_after);
+	else if (strcmp(string_before, "Ans") == 0)
+		assignAns(question, string_after);
+
 	return;
 }
 
