@@ -1,12 +1,11 @@
 # ExamTex (Team 22)
-
 ## Usage
 First, clone the repo and build the project.
 
 ```
 git clone https://github.com/hi-im-buggy/examtex-dsa22
 cd examtex-dsa22
-mkdir bin
+mkdir bin;
 make
 ```
 
@@ -152,7 +151,58 @@ int findString(const char *str, int n, string_node *hashtable[]);
 So, In this way, each of the functions mentioned above are a part of the Utils and operate as a medium between Parser and Interpreter.  
 Utils is the part of the program which controls the manipulation and storage of the Input Data that is provided by the User to Parser.
 
+### Interpreter
+
+#### Interpreter.c
+This is the header file for the interpreter.c of the project. It contains the structs “Question”, the “Question_Bank” and the “User_Parameter”. The struct Question contains information about the question such as the text, options, and the final answer. The struct Question_Bank contains the collection of questions in an array and also has a variable to store the total number of questions. The User_Parameter struct stores the requirements and the conditions for the final question paper.
+
+#### Interpreter.c
+
+This file contains the functions which are used to create the final question paper from the large question bank following the requirements of the user. 
+
+####  The functions involved in the Interpreter are :
+
+```c
+int comparator_fn_diff(double A, double B, char comparator[2]);
+int comparator_fn_type(char *Question_type, User_Parameters *UP);
+int get_Questions(User_Parameters *UP, Question_Bank *QB);
+int create_QuestionPaper(Question **Question_collection, int size, int N);
+int print_QuestionPaper(Question **QuestionPaper, int N);
+```
+
+####    1.get_Questions:
+
+The get_Questions function takes the struct User_Parameter and struct Question_Bank as parameters and chooses “all” the questions that satisfy the given conditions of type and difficulty and store them in an array of struct questions. 
+
+  Time Complexity: 
+  As we traverse through the whole Question_Bank in a loop the time complexity would be O(N).
+
+####    2.comparator_fn_diff:
+
+For checking if the questions satisfy our conditions in the get_Questions function we use two functions in the get_Questions function which are comparator_fn_diff and comparator_fn_type. The comparator_fn_diff takes the difficulty level of the question and the difficulty level asked in the question paper and a comparator for deciding which comparator to use, to compare both the difficulties. It returns 1 if the required condition is satisfied.
+
+	Time Complexity:
+	This takes O(1) time as it is just comparing two variables.
+
+####    3.comparator_fn_type:
+
+Similarly, this function takes the question type and the User_Parameter struct as parameters to compare the type of the question and the required type. It returns 1 if the required condition is satisfied.
+
+	Time Complexity:
+	This also takes O(1) time as it is just comparing two variables.
+
+####    4.create_QuestionPaper:
+
+We have already chosen the questions that follow our type and difficulty level. This function picks randomly the number of questions (using the rand and srand in time.h) that the user wants and while picking we take care of repetitions by using a hash table, and puts these questions into the final QP struct (the question paper struct). 
+
+  Time Complexity: We traverse through the while loop till we have the required number of questions and also we might also have to traverse for the linear probing (can't be more than N) so the total time complexity would be O(N*N).
+	
+####    Data Structures used:
+
+The data structures which are mainly used are structs and arrays of structs. We have also used Hashtables to ensure that the questions are not repeated.
+
 ### Using the 'list' container
+
 'list' is a generic container to act as a dynamic array, similar to C++'s
 vector template.  Functions like `listAppend()`, `listInsertAt()`,
 and `listDeleteAt()` are available to modify data held in a list.
@@ -164,6 +214,7 @@ a list `l` must be initialized with `listInit(&l, sizeof(data_type)`
 and destroyed after use with `listDestroy(&l)`
 
 #### Wrappers
+
 For the wrapper functions, add the line `GENERATE_LIST_WRAPPER(data_type)`
 near the end of `src/listwrapper.h`. The data type must itself be accessible
 from the headerfile. See for example:
@@ -208,6 +259,7 @@ int main()
 ```
 
 #### Generics
+
 For accessing data stored in a list, `listAt()` is used, which returns a `void` pointer to the specified index.
 This pointer must be typecast to the correct data type to be used properly.
 
@@ -228,6 +280,7 @@ listDestroy(&l); // free the memory associated with the list
 ```
 
 ## Contribution guidelines
+
 - Keep the `master` branch clean and deployable. When introducing new features
   or attempting to fix bugs, use a different branch.
 - Make a pull request once you feel a branch is ready to be merged with
@@ -238,6 +291,7 @@ listDestroy(&l); // free the memory associated with the list
   please use 'issues' on GitHub to bring attention to it.
 
 ### Directory structure
+
 The project directory structure is organised as follows:
 ```
 ./
