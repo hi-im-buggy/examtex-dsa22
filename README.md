@@ -1,7 +1,7 @@
-   ## _**A brief report on Util Functions involved in DSA-ExamTeX-22 Project**_
+   ### Utils
                                     
 
- - ##  The functions involved in the Utils are :
+ - ####  The functions involved in the Utils are :
  
     ```c
     void assign(Question_B question, char string_before[], char string_after[])
@@ -15,7 +15,8 @@
 ####    1. __assign( )__
 
         - This is the key function for the working of Parser
-          and acts as the link between Interpreter and Parser, by manipulating the input data read by Parser and Storing it in the Data  Structures, which the Interpreter uses to analyse.
+          and acts as the link between Interpreter and Parser, by manipulating the input data read by Parser 
+          and Storing it in the Data  Structures, which the Interpreter uses to analyse.
         - This is a common function for all the major types of Data that is necessary for Question Bank Questions.
         - Takes the Pointer to `Question Bank Data Structure, Pre-Sanitized token and Post-Sanitized tokens` as Input. 
         - Depending on the Pre-Sanitized and Post-Sanitized Tokens, that are passed into the function,
@@ -49,7 +50,8 @@
         - Takes Pointer to Question Bank Data Structure , Post-Sanitized Token as Input arguments.
         - This function is used to store the options for the question that is being stored in the Data Structure.
         - This function is useful in distinguishing between the Option Storing mechanisms, Basing on the Type of Question.
-        - It uses iteration to find the number of options being provided and stores that as well, making it easier and clear for the Interpreter to work with.
+        - It uses iteration to find the number of options being provided and stores that as well, 
+          making it easier and clear for the Interpreter to work with.
         - Stores all the Option Strings in an array of strings.
     
 ####    5. __assignAns( )__
