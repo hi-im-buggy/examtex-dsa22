@@ -19,6 +19,7 @@ struct __parser_state {
 };
 
 Question_Bank parse_qb_file(FILE *fstream); // to parse question bank file
-User_Parameters_Set parse_up_file(FILE *fstream); // to parse user params (qn paper) file
+User_Parameters_Set
+parse_up_file(FILE *fstream); // to parse user params (qn paper) file
 
 #endif // __INCLUDE__PARSER_H
