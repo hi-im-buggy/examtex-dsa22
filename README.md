@@ -61,13 +61,16 @@ user parameter files. It also raises errors where possible.
 The functions involved in the Utils are :
 
 ```c
-void assign(Question_B question, char string_before[], char string_after[])
+void assign(Question_B question, char string_before[], char string_after[]);
 void assignType(Question_B question, char *string_after);
-void assignDiff(Question_B question, char *string_after)
-void assignOpt(Question_B question, char *string_after)
-void assignAns(Question_B question, char *string_after)
-char *stripWhitespace(char *line, int *length)
-bool isBlankLine(char *line)
+void assignDiff(Question_B question, char *string_after);
+void assignOpt(Question_B question, char *string_after);
+void assignAns(Question_B question, char *string_after);
+char *stripWhitespace(char *line, int *length);
+bool isBlankLine(char *line);
+int hashString(const char *str);
+int insertString(const char *str, int n, string_node *hashtable[]);
+int findString(const char *str, int n, string_node *hashtable[]);
 ```
 
 #### 1. __assign( )__
@@ -135,6 +138,14 @@ bool isBlankLine(char *line)
   a line of string being passed into it is Empty Line or has some text.
 - Takes the Pointer to the Line String as input.
 - works like a toggle (Bool).
+
+#### 8. __hashString() ,insertString(), findString()__
+
+  - These three functions are useful to Hash the Input Text for the question, which ensures that the questions do not repeat.
+  - We use a Hash Table to make sure this is implemented properly.
+  - We've used Separate Chaining in implementing the hashing.
+  - We're Inserting the String in O(1) and Finding the String is O(1) time, which is very convenient.
+
 
 
 So, In this way, each of the functions mentioned above are a part of the Utils and operate as a medium between Parser and Interpreter.  
