@@ -1,6 +1,8 @@
 #ifndef INTERPRETER_H
 #define INTERPRETER_H
 
+#define HASH 1007
+
 struct Question {
 	int hashq;		   // stores the hash value of the question text
 	char *type;		   // defaults to MCQ for version 1 (type = "MCQ")

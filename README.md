@@ -171,28 +171,24 @@ int print_QuestionPaper(Question **QuestionPaper, int N);
 ```
 
 ####    1.get_Questions:
-
 The get_Questions function takes the struct User_Parameter and struct Question_Bank as parameters and chooses “all” the questions that satisfy the given conditions of type and difficulty and store them in an array of struct questions. 
 
   Time Complexity: 
   As we traverse through the whole Question_Bank in a loop the time complexity would be O(N).
 
 ####    2.comparator_fn_diff:
-
 For checking if the questions satisfy our conditions in the get_Questions function we use two functions in the get_Questions function which are comparator_fn_diff and comparator_fn_type. The comparator_fn_diff takes the difficulty level of the question and the difficulty level asked in the question paper and a comparator for deciding which comparator to use, to compare both the difficulties. It returns 1 if the required condition is satisfied.
 
 	Time Complexity:
 	This takes O(1) time as it is just comparing two variables.
 
 ####    3.comparator_fn_type:
-
 Similarly, this function takes the question type and the User_Parameter struct as parameters to compare the type of the question and the required type. It returns 1 if the required condition is satisfied.
 
 	Time Complexity:
 	This also takes O(1) time as it is just comparing two variables.
 
 ####    4.create_QuestionPaper:
-
 We have already chosen the questions that follow our type and difficulty level. This function picks randomly the number of questions (using the rand and srand in time.h) that the user wants and while picking we take care of repetitions by using a hash table, and puts these questions into the final QP struct (the question paper struct). 
 
   Time Complexity: We traverse through the while loop till we have the required number of questions and also we might also have to traverse for the linear probing (can't be more than N) so the total time complexity would be O(N*N).
