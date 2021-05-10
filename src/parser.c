@@ -90,7 +90,6 @@ Question_Bank parse_qb_file(FILE *fstream) /*{{{*/
 				char *post_token_sanitized =
 					stripWhitespace(post_token, &post_token_length);
 
-				putchar('\n');
 #ifdef PARSER_DEBUG
 				printf("pre_token_sanitized: %s\n", pre_token_sanitized);
 				printf("post_token_sanitized: %s\n", post_token_sanitized);
