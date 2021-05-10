@@ -163,11 +163,11 @@ This file contains the functions which are used to create the final question pap
 ####  The functions involved in the Interpreter are :
 
 ```c
-int comparator_fn_diff(double A, double B, char comparator[2])
-int comparator_fn_type(char *Question_type, User_Parameters *UP)
-int get_Questions(User_Parameters *UP, Question_Bank *QB)
-int create_QuestionPaper(Question **Question_collection, int size, int N)
-int print_QuestionPaper(Question **QuestionPaper, int N)
+int comparator_fn_diff(double A, double B, char comparator[2]);
+int comparator_fn_type(char *Question_type, User_Parameters *UP);
+int get_Questions(User_Parameters *UP, Question_Bank *QB);
+int create_QuestionPaper(Question **Question_collection, int size, int N);
+int print_QuestionPaper(Question **QuestionPaper, int N);
 ```
 
 ####    1.get_Questions:
@@ -194,9 +194,11 @@ We have already chosen the questions that follow our type and difficulty level. 
   Time Complexity: We traverse through the while loop till we have the required number of questions and also we might also have to traverse for the linear probing (can't be more than N) so the total time complexity would be O(N*N).
 	
 ####    Data Structures used:
+
 The data structures which are mainly used are structs and arrays of structs. We have also used Hashtables to ensure that the questions are not repeated.
 
 ### Using the 'list' container
+
 'list' is a generic container to act as a dynamic array, similar to C++'s
 vector template.  Functions like `listAppend()`, `listInsertAt()`,
 and `listDeleteAt()` are available to modify data held in a list.
@@ -208,6 +210,7 @@ a list `l` must be initialized with `listInit(&l, sizeof(data_type)`
 and destroyed after use with `listDestroy(&l)`
 
 #### Wrappers
+
 For the wrapper functions, add the line `GENERATE_LIST_WRAPPER(data_type)`
 near the end of `src/listwrapper.h`. The data type must itself be accessible
 from the headerfile. See for example:
@@ -252,6 +255,7 @@ int main()
 ```
 
 #### Generics
+
 For accessing data stored in a list, `listAt()` is used, which returns a `void` pointer to the specified index.
 This pointer must be typecast to the correct data type to be used properly.
 
@@ -272,6 +276,7 @@ listDestroy(&l); // free the memory associated with the list
 ```
 
 ## Contribution guidelines
+
 - Keep the `master` branch clean and deployable. When introducing new features
   or attempting to fix bugs, use a different branch.
 - Make a pull request once you feel a branch is ready to be merged with
@@ -282,6 +287,7 @@ listDestroy(&l); // free the memory associated with the list
   please use 'issues' on GitHub to bring attention to it.
 
 ### Directory structure
+
 The project directory structure is organised as follows:
 ```
 ./
