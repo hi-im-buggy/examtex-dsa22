@@ -85,7 +85,7 @@ string_node **hash_Table = NULL;
 int create_QuestionPaper(Question **Question_collection, int size, int N)
 {
 	if (hash_Table == NULL) {
-		hash_Table = (string_node **) malloc( sizeof(string_node *) * HASH);
+		hash_Table = (string_node **)malloc(sizeof(string_node *) * HASH);
 	}
 	srand(time(0));
 
@@ -157,15 +157,12 @@ int print_QuestionPaper(Question **QuestionPaper, int N)
 	if (QuestionPaper != NULL) {
 		for (int j = 0; j < N; j++) {
 			i++;
-			printf("%d. %s\n", i, QuestionPaper[j] -> text);
+			printf("%d. %s\n", i, QuestionPaper[j]->text);
 
-			if ( strcmp(QuestionPaper[j] -> type, "MCQ") == 0 ) {
-				for (int k = 0; k < QuestionPaper[j] -> no_options; k++) {
-					printf("  %c) %s\n",
-							'a' + k,
-							QuestionPaper[j] -> options[k]);
+			if (strcmp(QuestionPaper[j]->type, "MCQ") == 0) {
+				for (int k = 0; k < QuestionPaper[j]->no_options; k++) {
+					printf("  %c) %s\n", 'a' + k, QuestionPaper[j]->options[k]);
 				}
-
 			}
 			putchar('\n');
 		}
