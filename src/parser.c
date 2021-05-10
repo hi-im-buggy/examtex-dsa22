@@ -176,7 +176,8 @@ User_Parameters_Set parse_up_file(FILE *fstream) /*{{{*/
 			cur_params.type = NULL;
 			cur_params.difficulty = 0;
 			cur_params.no_questions = 0;
-			cur_params.comparator[0] = cur_params.comparator[0] = ' ';
+			cur_params.comparator[0] = ' ';
+			cur_params.comparator[1] = ' ';
 		}
 
 		// we're out of the question if we encounter a blank line

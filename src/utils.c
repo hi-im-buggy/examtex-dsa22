@@ -204,13 +204,80 @@ bool isBlankLine(char *line)
 	bool is_blank = true;
 
 	// check each character in the line before null terminator
-	do {
+	while (*line) {
 		if (!isspace(*line)) {
 			is_blank = false;
 			break;
 		}
 		line++;
-	} while (*line);
+	}
 
 	return is_blank;
+}
+/* {{{ String hashing */
+int hashString(const char *str)
+{
+	int h = 0;
+	char ch;
+
+	/* single '=' on purpose */
+	while ((ch = *str++))
+		h = (1LL * h + 1LL * (int)ch * SMALLPRIME) % BIGPRIME;
+
+	/* FIXME */
+	while (h < 0)
+		h = (h + 1LL * BIGPRIME) % BIGPRIME;
+
+	return h;
+}
+
+int insertString(const char *str, int n, string_node *hashtable[])
+{
+	int h = hashString(str) % n;
+	int probes = 0;
+
+	if (hashtable[h] == NULL) {
+		/* alloc memory for new node */
+		string_node *new = (string_node *)malloc(sizeof(string_node));
+		new->next = NULL;
+
+		/* alloc memory for the string attached to the node as well */
+		char *store_str = (char *)malloc(strlen(str) + 1);
+		strcpy(store_str, str);
+		new->str = store_str;
+		hashtable[h] = new;
+		return probes;
+	}
+
+	/* traverse the linked list in case of a collision */
+	string_node *cur = hashtable[h];
+	int collide = 0;
+	while (cur->next != NULL) {
+		cur = cur->next;
+		collide = 1;
+	}
+	probes = probes + collide;
+
+	cur->next = (string_node *)malloc(sizeof(string_node));
+	cur->next->next = NULL;
+	char *store_str = (char *)malloc(strlen(str) + 1);
+	strcpy(store_str, str);
+	cur->next->str = store_str;
+
+	return probes;
+}
+
+int findString(const char *str, int n, string_node *hashtable[])
+{
+	int h = hashString(str) % n;
+	string_node *cur = hashtable[h];
+
+	while (cur != NULL) {
+		if (strcmp(str, cur->str) == 0)
+			return 1;
+
+		cur = cur->next;
+	}
+
+	return 0;
 }
