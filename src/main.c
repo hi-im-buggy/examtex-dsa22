@@ -44,17 +44,26 @@ int main(int argc, char *const argv[])
 		upstream = fopen(up_file, "r");
 
 	Question_Bank qb = parse_qb_file(instream);
+
 	User_Parameters_Set ups = parse_up_file(upstream);
+
 	extern Question **Question_collection;
 	extern Question **QP;
+
+	printf("# Question Paper\n\n");
 
 	int num_qualified_questions;
 	for (int i = 0; i < ups.no_params; i++) {
 		num_qualified_questions = get_Questions(ups.params + i, &qb);
+
 		create_QuestionPaper(Question_collection, num_qualified_questions,
 							 ups.params[i].no_questions);
+
 		print_QuestionPaper(QP, ups.params[i].no_questions);
 	}
+
+	printf("----------------------\n");
+	printf("End of question paper\n");
 
 	return 0;
 }

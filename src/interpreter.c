@@ -1,9 +1,9 @@
+#include "interpreter.h"
+#include "utils.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-
-#include "interpreter.h"
 
 Question **Question_collection;
 Question **QP;
@@ -57,7 +57,6 @@ int get_Questions(User_Parameters *UP, Question_Bank *QB)
 
 	int check_diff, check_type;
 
-	int i = 0;
 	int j = 0;
 	for (int i = 0; i < QB->no_questions; i++) {
 		diffA = QB->questions[i]->difficulty;
@@ -81,8 +80,13 @@ int get_Questions(User_Parameters *UP, Question_Bank *QB)
 	return j;
 }
 
+string_node **hash_Table = NULL;
+
 int create_QuestionPaper(Question **Question_collection, int size, int N)
 {
+	if (hash_Table == NULL) {
+		hash_Table = (string_node **) malloc( sizeof(string_node *) * HASH);
+	}
 	srand(time(0));
 
 	QP = NULL;
@@ -112,10 +116,30 @@ int create_QuestionPaper(Question **Question_collection, int size, int N)
 			else
 				j = index;
 
-			QP[i] = (Question *)malloc(sizeof(Question));
-			QP[i] = Question_collection[j];
-			Question_collection[j] = NULL;
-			i++;
+			if (findString(Question_collection[j]->text, HASH, hash_Table) ==
+				0) {
+				insertString(Question_collection[j]->text, HASH, hash_Table);
+				QP[i] = (Question *)malloc(sizeof(Question));
+				QP[i] = Question_collection[j];
+				Question_collection[j] = NULL;
+				i++;
+			}
+
+			int k = 0;
+			int ct = 0;
+
+			while (k < size) {
+				if (Question_collection[k] != NULL) {
+					ct = 1;
+					break;
+				}
+				k++;
+			}
+
+			if (ct == 0) {
+				printf("No more questions available!\n");
+				break;
+			}
 		}
 	}
 
@@ -127,25 +151,27 @@ int create_QuestionPaper(Question **Question_collection, int size, int N)
 	return 0;
 }
 
-// QP is the question paper to be printed out ...
-// Dummy Function
 int print_QuestionPaper(Question **QuestionPaper, int N)
 {
+	static int i = 0;
 	if (QuestionPaper != NULL) {
-		for (int i = 0; i < N; i++) {
-			printf("%d. \n", i + 1);
-			printf("%s\n", QuestionPaper[i]->text);
-			if (!(strcmp(QuestionPaper[i]->type, "MCQ"))) {
-				for (int j = 0; j < QuestionPaper[i]->no_options; j++) {
-					printf("%d %s\n", (j + 1), QuestionPaper[i]->options[j]);
+		for (int j = 0; j < N; j++) {
+			i++;
+			printf("%d. %s\n", i, QuestionPaper[j] -> text);
+
+			if ( strcmp(QuestionPaper[j] -> type, "MCQ") == 0 ) {
+				for (int k = 0; k < QuestionPaper[j] -> no_options; k++) {
+					printf("  %c) %s\n",
+							'a' + k,
+							QuestionPaper[j] -> options[k]);
 				}
+
 			}
-			printf("\n");
+			putchar('\n');
 		}
 	}
-
 	else
-		printf("NO QUESTIONS TO DISPLAY\n");
+		fprintf(stderr, "No Questions to display!\n");
 
 	return 0;
 }
