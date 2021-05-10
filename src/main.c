@@ -24,8 +24,10 @@ int main(int argc, char *const argv[])
 		case 'u': up_file = optarg; break;
 		case 'h':
 		default:
-			fprintf(stderr, "\nUsage: %s -i [question bank file] -u [user params file]\n\n",
-					argv[0]);
+			fprintf(
+				stderr,
+				"\nUsage: %s -i [question bank file] -u [user params file]\n\n",
+				argv[0]);
 			return 0;
 		}
 	}
