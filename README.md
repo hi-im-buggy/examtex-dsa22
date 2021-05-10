@@ -140,10 +140,12 @@ bool isBlankLine(char *line)
 So, In this way, each of the functions mentioned above are a part of the Utils and operate as a medium between Parser and Interpreter.  
 Utils is the part of the program which controls the manipulation and storage of the Input Data that is provided by the User to Parser.
 
-### INTERPRETER.H
+### Interpreter
+
+#### Interpreter.c
 This is the header file for the interpreter.c of the project. It contains the structs “Question”, the “Question_Bank” and the “User_Parameter”. The struct Question contains information about the question such as the text, options, and the final answer. The struct Question_Bank contains the collection of questions in an array and also has a variable to store the total number of questions. The User_Parameter struct stores the requirements and the conditions for the final question paper.
 
-### INTERPRETER.C
+#### Interpreter.c
 
 This file contains the functions which are used to create the final question paper from the large question bank following the requirements of the user. 
 
