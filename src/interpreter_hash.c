@@ -1,9 +1,11 @@
 #include "interpreter.h"
-#include "utils.h"
+#include "utils.c"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+
+#define HASH 1007
 
 Question **Question_collection;
 Question **QP;
@@ -57,6 +59,7 @@ int get_Questions(User_Parameters *UP, Question_Bank *QB)
 
 	int check_diff, check_type;
 
+	int i = 0;
 	int j = 0;
 	for (int i = 0; i < QB->no_questions; i++) {
 		diffA = QB->questions[i]->difficulty;
@@ -80,13 +83,10 @@ int get_Questions(User_Parameters *UP, Question_Bank *QB)
 	return j;
 }
 
-string_node **hash_Table = NULL;
+string_node **hash_Table;
 
 int create_QuestionPaper(Question **Question_collection, int size, int N)
 {
-	if (hash_Table == NULL) {
-		hash_Table = (string_node **)malloc(sizeof(string_node *) * HASH);
-	}
 	srand(time(0));
 
 	QP = NULL;
@@ -151,24 +151,25 @@ int create_QuestionPaper(Question **Question_collection, int size, int N)
 	return 0;
 }
 
+// QP is the question paper to be printed out ...
+// Dummy Function
 int print_QuestionPaper(Question **QuestionPaper, int N)
 {
-	static int i = 0;
 	if (QuestionPaper != NULL) {
-		for (int j = 0; j < N; j++) {
-			i++;
-			printf("%d. %s\n", i, QuestionPaper[j]->text);
-
-			if (strcmp(QuestionPaper[j]->type, "MCQ") == 0) {
-				for (int k = 0; k < QuestionPaper[j]->no_options; k++) {
-					printf("  %c) %s\n", 'a' + k, QuestionPaper[j]->options[k]);
+		for (int i = 0; i < N; i++) {
+			printf("%d. \n", i + 1);
+			printf("%s\n", QuestionPaper[i]->text);
+			if (!(strcmp(QuestionPaper[i]->type, "MCQ"))) {
+				for (int j = 0; j < QuestionPaper[i]->no_options; j++) {
+					printf("%d %s\n", (j + 1), QuestionPaper[i]->options[j]);
 				}
 			}
-			putchar('\n');
+			printf("\n");
 		}
 	}
+
 	else
-		fprintf(stderr, "No Questions to display!\n");
+		printf("NO QUESTIONS TO DISPLAY\n");
 
 	return 0;
 }

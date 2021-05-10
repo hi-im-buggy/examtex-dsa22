@@ -76,7 +76,6 @@ void assignOpt(Question_B question, char *string_after)
 	// no,of options is No.of commas +1
 	CommaCount++;
 	// Now this is the count of options.
-	char **array;
 	question->no_options = CommaCount;
 	// we have comma count no.of options, so we can make an array of arrays
 	// char** OptArray =
