@@ -1,7 +1,7 @@
   ## _**A brief report on Util Functions involved in DSA-ExamTeX-22 Project**_
                                     
 
- ###   The functions involved in the Utils are :
+ ##   The functions involved in the Utils are :
     ```c
     void assign(Question_B question, char string_before[], char string_after[])
     void assignType(Question_B question, char *string_after)
