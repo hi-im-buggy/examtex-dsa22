@@ -1,49 +1,29 @@
 \sample
 {type = mcq}
 {difficulty <= 0.6 }
-{number = 3 }
+{number = 1 }
 
 \sample
 {type = mcq}
 {difficulty >=0.5}
-{number = 4}
+{number = 1}
 
 \sample
 {type = mcq}
 {difficulty == 0.2 }
-{number = 2}
+{number = 1}
 
 \sample
 {type=fib}
 {difficulty > 0.3}
-{number= 5}
+{number= 1}
 
 \sample
 {type=fib}
 {difficulty > 0.2}
-{number= 4}
+{number= 1}
 
 \sample
 {type=fib}
 {difficulty <=0.8}
-{number=}
-
-\sample
-{type=both}
-{difficulty ==0.2} 
-{number= 2}
-
-\sample
-{type=both}
-{difficulty < 0.5}
-{number= 3}
-
-\sample
-{type=both}
-{difficulty > 0.1}
-{number= 4}
-
-\sample
-{type=both}
-{difficulty <= 0.8}
-{number= 4}
+{number=1}

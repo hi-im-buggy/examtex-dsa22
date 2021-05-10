@@ -1,4 +1,27 @@
 # ExamTex (Team 22)
+### Group members
+#### Rahothvarman P (2020114008)
+Worked on the Interpreter for MCQs.
+
+#### Lenka Charan Sahit (2020101011)
+Worked on the Interpreter for FIB type questions.
+
+#### Pratyaksh Gautam (2020114002)
+Worked on the Parser skeleton and wrote the `list` functions.
+
+#### Akash Vallamsetty (2020102050)
+Worked on test cases and documentation, and output formatting.
+
+#### Sai Namrath Polakampalli (2020101063)
+Worked on the utility functions used by the parser, including `assign()` and related functions.
+
+## Important files and major contributors
+- `src/interpreter.c`: Rahothvarman and Charan
+- `src/list.c`: Pratyaksh
+- `src/main.c`: Pratyaksh and Akash
+- `src/parser.c`: Pratyaksh and Namrath
+- `src/utils.c`: Namrath
+
 ## Usage
 First, clone the repo and build the project.
 
@@ -196,6 +219,20 @@ We have already chosen the questions that follow our type and difficulty level. 
 ####    Data Structures used:
 
 The data structures which are mainly used are structs and arrays of structs. We have also used Hashtables to ensure that the questions are not repeated.
+
+### Marks: Further Scope
+Considering the future design of the project, the parser has been written in a
+general manner and the code is reusable by only changing `assign()` function.
+Thus, the code is flexible enough to allow for more types of questions in the
+future by modifying the functions in utils and interpreter.
+
+As for the marks, since questions store the correct option, it is only a matter
+of taking the input from the students, which can be done right after printing (like in moodle xD),
+comparing against the correct option, and using the difficulty to give marks on the basis of
+a metric like the weighted average.
+
+The marks thus collected can be displayed or further analysed (maybe to consider
+the accuracy of question difficulty).
 
 ### Using the 'list' container
 
