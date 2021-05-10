@@ -1,9 +1,9 @@
+#include "interpreter.h"
+#include "utils.c"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "utils.c"
-#include "interpreter.h"
 
 #define HASH 1007
 
@@ -116,36 +116,30 @@ int create_QuestionPaper(Question **Question_collection, int size, int N)
 			else
 				j = index;
 
-			if (findString(Question_collection[j]->text,HASH, hash_Table)==0)
-            {
-                insertString(Question_collection[j]->text, HASH, hash_Table);
-                QP[i] = (Question *)malloc(sizeof(Question));
-        	    QP[i] = Question_collection[j];
-			    Question_collection[j] = NULL;
-			    i++;
-            }
+			if (findString(Question_collection[j]->text, HASH, hash_Table) ==
+				0) {
+				insertString(Question_collection[j]->text, HASH, hash_Table);
+				QP[i] = (Question *)malloc(sizeof(Question));
+				QP[i] = Question_collection[j];
+				Question_collection[j] = NULL;
+				i++;
+			}
 
-            int k=0;
-            int ct=0;
+			int k = 0;
+			int ct = 0;
 
-            while (k<size)
-            {
-                if (Question_collection[k]!=NULL)
-                {
-                    ct=1;
-                    break;
+			while (k < size) {
+				if (Question_collection[k] != NULL) {
+					ct = 1;
+					break;
+				}
+				k++;
+			}
 
-                }
-                k++;                    
-            }
-            
-            if (ct==0)
-            {
-                printf("No more questions available!\n");
-                break;
-            }
-            
-            
+			if (ct == 0) {
+				printf("No more questions available!\n");
+				break;
+			}
 		}
 	}
 
